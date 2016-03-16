@@ -1,0 +1,15 @@
+[Unit]
+Description=Docker Swarm
+After=conair-setup-environment.service consul.service
+Requires=conair-setup-environment.service consul.service
+
+[Service]
+TimeoutStartSec=0
+EnvironmentFile=/etc/environment
+ExecStartPre=-/usr/bin/docker kill swarm
+ExecStartPre=-/usr/bin/docker rm swarm
+ExecStartPre=/usr/bin/docker pull registry.local.giantswarm.io/swarm 
+ExecStart=/usr/bin/docker run --rm -p 4000:4000 registry.local.giantswarm.io/swarm manage -H :4000 --replication --advertise ${CONAIR_PUBLIC_IPV4}:4000 consul://${CONAIR_PRIVATE_IPV4}:8500
+
+[Install]
+WantedBy=multi-user.target

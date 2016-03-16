@@ -1,0 +1,11 @@
+FROM docker
+MAINTAINER Timo Derstappen <teemow@gmail.com>
+
+RUN echo "192.168.13.1 registry.local.giantswarm.io" >> /etc/hosts
+
+ADD config/consul.service /etc/systemd/system/
+ADD config/docker.service /etc/systemd/system/
+ADD config/swarm.service /etc/systemd/system/
+
+ENABLE swarm.service consul.service
+

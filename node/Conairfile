@@ -1,0 +1,6 @@
+FROM swarm-mgr-bootstrap
+MAINTAINER Timo Derstappen <teemow@gmail.com>
+
+ADD config/consul.service /etc/systemd/system/
+ADD config/swarm.service /etc/systemd/system/
+ADD config/docker.service /etc/systemd/system/

@@ -1,0 +1,8 @@
+version: "2"
+
+services:
+  ping:
+    image: registry.local.giantswarm.io/giantswarm/concurl
+    command: "--payload=pong"
+    ports:
+      - "80:80"
